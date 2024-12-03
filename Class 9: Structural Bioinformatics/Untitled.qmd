@@ -1,0 +1,235 @@
+---
+title: "Class9: Structural Bioinformatics"
+author: "Sophia Wang (A16838155)"
+format: pdf
+---
+This main database for structural data is called the PDB (protein data bank). Let's see what it contains:
+
+Data from:https://www.rcsb.org/stats/
+
+Read this into R
+```{r}
+pdbdb <- read.csv("Data Export Summary.csv",row.names = 1)
+pdbdb
+```
+and answer the following questions:
+
+```{r}
+pdbdb$Total
+```
+I need to remove the comma and convert to numeric to do math:
+```{r}
+as.numeric(sub(",","",pdbdb$Total))
+```
+I could turn this into a function to fix the whole table or any future table I read like this:
+```{r}
+x <- pdbdb$Total
+as.numeric(sub(",","",x))
+```
+
+```{r}
+comma2numeric <- function(x){
+  as.numeric(sub(",","",x))
+}
+```
+Test it
+```{r}
+comma2numeric(pdbdb$X.ray)
+```
+```{r}
+apply(pdbdb,2, comma2numeric)
+```
+##Or try a different read/import function:
+
+```{r}
+library(readr)
+pdbdb <- read_csv("Data Export Summary.csv")
+```
+```{r}
+sum(pdbdb$Total)
+```
+
+>Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+(sum(pdbdb$`X-ray`)+sum(pdbdb$EM))/sum(pdbdb$Total)*100
+```
+
+>Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+pdbdb$Total[1]/sum(pdbdb$Total)
+```
+
+>Q3: Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+226,414
+
+
+##Mol*
+Mol* (pronounced "molstar") is a new web-based molecular viewer that we will need to learn the basics of here.
+
+https://molstar.org/viewer/
+
+We will use PDB code: 1HSG
+
+>Q4: Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+The water molecules are in ball & stick representation, where H atoms are not displayed.
+
+>Q5: There is a critical “conserved” water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have
+
+HOH 308.
+
+>Q6: Generate and save a figure clearly showing the two distinct chains of HIV-protease along with the ligand. You might also consider showing the catalytic residues ASP 25 in each chain and the critical water (we recommend “Ball & Stick” for these side-chains). Add this figure to your Quarto document.
+
+![A first image from molstar](1HSG.png)
+
+![The all important catlytic ASP25 amino acids](1HSG (1).png)
+
+![Surface display showing Merk compound in the peptide binding pocket](1HSG (2).png)
+
+![HOH 308 in the peptide binding pocket](1HSG (3).png)
+
+![Another picture of HOH 308 as spacefill](1HSG (4).png)
+
+![Another picture with HOH 308 and ASP25 as spacefill](1HSG (5).png)
+
+
+##The Bio3D package
+
+The bio3d package allows us to do all sorts of strucutral bioinformatics work in R.
+
+Let's start with how it cna read these PDB ifles:
+
+```{r}
+library(bio3d)
+pdb <- read.pdb("1hsg")
+pdb
+```
+```{r}
+attributes(pdb)
+```
+```{r}
+head(pdb$atom)
+```
+```{r}
+pdbseq(pdb)[25]
+```
+>Q7: How many amino acid residues are there in this pdb object? 
+
+```{r}
+sum(pdb$calpha)
+length(pdbseq(pdb))
+```
+
+>Q8: Name one of the two non-protein residues? 
+
+HOH and MK1
+
+>Q9: How many protein chains are in this structure? 
+
+2
+
+```{r}
+unique(pdb$atom$chain)
+```
+
+##Predicting functional motions of a single structure
+
+Let's do a bioinformatics prediction of functional motions-i.e. the movements that one of these molecules needs to make to do its stuff.
+
+```{r}
+adk <- read.pdb("6s36")
+adk
+```
+
+```{r}
+# Perform flexiblity prediction
+m <- nma(adk)
+plot(m)
+```
+
+Write out multi-model PDB file (trajectory) that we can use to make an animation of the predicted motion. 
+```{r}
+mktrj(m, file="adk.pdb")
+```
+
+I can open this in Mol* to play the trajectory...
+
+##Comparative analysis of protein structures
+
+```{r}
+library(bio3d)
+```
+
+Here we will find and analyze all ADK structures in the PDB database.
+
+We will start with a single data base accession id: "1ake_A"
+
+```{r}
+id<-"1ake_A"
+aa <- get.seq(id)
+```
+I ran these cmds in the R brain/console
+install.packages("BiocManager")
+BiocManager::install("msa")
+
+>Q10. Which of the packages above is found only on BioConductor and not CRAN? 
+
+The `msa` package is form BioConductor.
+
+
+>Q13. How many amino acids are in this sequence, i.e. how long is this sequence?
+
+214
+
+```{r}
+attributes(aa)
+```
+```{r}
+aa$ali
+```
+```{r}
+#b <- blast.pdb(aa)
+#hits <- plot(b)
+#head(hits$pdb.id)
+```
+
+Pre-calculated resutls:
+
+```{r}
+hits <- NULL
+hits$pdb.id <- c('1AKE_A','6S36_A','6RZE_A','3HPR_A','1E4V_A','5EJE_A','1E4Y_A','3X2S_A','6HAP_A','6HAM_A','4K46_A','3GMT_A','4PZL_A')
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE, gzip=TRUE)
+```
+Next we will use the pdbaln() function to align and also optionally fit (i.e. superpose) the identified PDB structures.
+
+
+```{r}
+# Align releated PDBs
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+pdbs
+```
+
+##Principal component analysis
+
+```{r}
+# Perform PCA
+pc.xray <- pca(pdbs)
+plot(pc.xray,pc.axes=c(1,2))
+```
+To visualize the major structural variations in the ensemble the function mktrj() can be used to generate a trajectory PDB file by interpolating along a give PC (eigenvector):
+
+```{r}
+pc1 <- mktrj(pc.xray, pc=1, file="pc_1.pdb")
+
+```
+
+
+```{r}
+uniprot<-248838887
+pdb <- 195610
+pdb/uniprot*100
+```
+
