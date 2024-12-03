@@ -1,0 +1,215 @@
+---
+title: "Class 5: Data Viz with ggplot"
+author: "Sophia Wang (A16838155)"
+format: pdf
+---
+
+## Plotting in R
+
+R has lot's of ways to make plots and figures. This includes so-called **base** graphics and packages like **ggplot2** 
+
+```{r}
+plot(cars)
+```
+
+This is a **base** R plot of the in-built `cars` dataset that has only two columns:
+
+```{r}
+head(cars)
+```
+
+>Q.How would we plot this wee dataset with **ggplot2**?
+
+All ggplot figures have at least 3 layers:
+
+- **data**
+- **aes** (how the data ap to the plot)
+- **deoms** (how we draw the pot, lines, points, etc.)
+
+Before I use any new package I need to download and install it with the `install.packages()` command.
+
+I never use `install.packages()` within my quarto document otherwise I wiill install the package over and over and over again - which is silly!
+
+Once a package is installed I can ,load it up with the `library()` function.
+
+```{r}
+# install.packages("ggplot2")
+library(ggplot2)
+ggplot(cars)+
+  aes(x=speed,y=dist)+
+  geom_point()
+```
+
+**Key points**: For simple plots (like the one above) ggplot is more verbose (we need to do more typing) but as plots get more complicated, ggplot starts to be more clear and simple than base R plot()
+
+```{r}
+p<-ggplot(cars)+
+  aes(x=speed,y=dist)+
+  geom_point()+
+  geom_smooth(method="lm",se=FALSE)+
+  labs(title="Stopping distance of old cars",subtitle="From the in-built cars dataset")+
+  theme_bw()
+```
+```{r}
+p
+```
+
+```{r}
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+head(genes)
+
+```
+>Q Use the nrow() function to find out how many genes are in this dataset. What is your answer?
+
+```{r}
+nrow(genes)
+```
+
+>Q Use the colnames() function and the ncol() function on the genes data frame to find out what the column names are (we will need these later) and how many columns there are. How many columns did you find?
+
+```{r}
+colnames(genes)
+ncol(genes)
+```
+
+>Q Use the table() function on the State column of this data.frame to find out how many ‘up’ regulated genes there are. What is your answer?
+
+```{r}
+table(genes$State)
+```
+
+>Q Using your values above and 2 significant figures. What fraction of total genes is up-regulated in this dataset?
+
+```{r}
+round( table(genes$State)/nrow(genes)*100, 2 )
+```
+
+
+The key functions here were:
+`nrows()`and `ncol()`
+`table()` is very useful for getting counts
+finally `round()`
+
+A first plot:
+```{r}
+ggplot(genes)+
+  aes(Condition1, Condition2)+
+  geom_point(col="blue",alpha=0.4)
+```
+```{r}
+p2<-ggplot(genes)+
+  aes(Condition1, Condition2,col=State)+
+  geom_point()
+p2
+```
+```{r}
+p2+
+  scale_colour_manual( values=c("blue","gray","red") )+
+  labs(title="Gene Expresion Changes Upon Drug Treatment",
+         x="Control (no drug) ",
+         y="Drug Treatment")
+```
+
+
+
+
+```{r}
+# File location online
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+
+gapminder <- read.delim(url)
+library(dplyr)
+```
+>Q How many years are in this dataset?
+
+```{r}
+length(gapminder$year)
+table(gapminder$year)
+length(unique(gapminder$year))
+```
+
+
+>Q Extract data for the US in 1992
+
+```{r}
+filter(gapminder,country=="United States")
+
+```
+
+
+```{r}
+filter(gapminder,country=="United States",year==1992)
+```
+
+>Q What is the population of Ireland
+
+```{r}
+max(filter(gapminder,country=="Ireland")$year)
+filter(gapminder,country=="Ireland",year==2007)
+```
+>Q What countries in dataset had pop smaller than Ireland in 2007
+
+- First limit/subset the dataset to the year 2007
+- Then find the `pop` value for Ireland
+- Then extract all rows with `pop` less than Ireland's
+
+```{r}
+all_country <- filter(gapminder,year==2007)
+pop_Ireland <- filter(gapminder,country=="Ireland",year==2007)$pop
+countries_smaller<-all_country$country[all_country$pop<pop_Ireland]
+length(countries_smaller)
+```
+
+
+>Q Complete the code below to produce a first basic scater plot of this gapminder_2007 dataset:
+
+```{r}
+gapminder_2007 <- gapminder %>% filter(year==2007)
+```
+
+```{r}
+ggplot(gapminder_2007) +
+  aes(x=gdpPercap, y=lifeExp, color=continent, size=pop) +
+  geom_point(alpha=0.5)
+```
+
+```{r}
+ggplot(gapminder_2007) + 
+  aes(x = gdpPercap, y = lifeExp, color = pop) +
+  geom_point(alpha=0.8)
+```
+
+```{r}
+ggplot(gapminder_2007) + 
+  aes(x = gdpPercap, y = lifeExp, size = pop) +
+  geom_point(alpha=0.5)
+```
+```{r}
+ggplot(gapminder_2007) + 
+  geom_point(aes(x = gdpPercap, y = lifeExp,
+                 size = pop), alpha=0.5) + 
+  scale_size_area(max_size = 10)
+```
+> Q Can you adapt the code you have learned thus far to reproduce our gapminder scatter plot for the year 1957? What do you notice about this plot is it easy to compare with the one for 2007?
+
+```{r}
+gapminder_1957 <- gapminder %>% filter(year==1957)
+ggplot(gapminder_1957)+
+  aes(x=gdpPercap,y=lifeExp,color=continent,size=pop)+
+  geom_point(alpha=0.7)+
+  scale_size_area(max_size = 15)
+
+```
+
+>Q Do the same steps above but include 1957 and 2007 in your input dataset for ggplot(). You should now include the layer facet_wrap(~year) to produce the following plot:
+
+```{r}
+gapminder_1957_2007<- gapminder %>% filter(year==1957 | year==2007)
+ggplot(gapminder_1957_2007)+
+  aes(x=gdpPercap,y=lifeExp,color=continent,size=pop)+
+  geom_point(alpha=0.7)+
+  scale_size_area(max_size = 15)+
+  facet_wrap(~year)
+```
+
