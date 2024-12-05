@@ -1,7 +1,7 @@
 ---
 title: "Class 8: PCA Mini Project"
 author: "Sophia Wang A16838155"
-format: pdf
+format: gfm
 ---
 It is important to consider scaling your data before analysis such as PCA.
 
