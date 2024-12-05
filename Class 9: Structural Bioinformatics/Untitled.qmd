@@ -1,7 +1,7 @@
 ---
 title: "Class9: Structural Bioinformatics"
 author: "Sophia Wang (A16838155)"
-format: pdf
+format: gfm
 ---
 This main database for structural data is called the PDB (protein data bank). Let's see what it contains:
 
