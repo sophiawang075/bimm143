@@ -1,0 +1,23 @@
+---
+title: "Class 12: Genome informatics (online class)"
+author: "Sophia Wang (A16838155)"
+format: html
+---
+# Section 1. Proportion of G/G in a population
+
+```{r}
+mxl <- read.csv("373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378 (1).csv")
+head(mxl)
+```
+```{r}
+table(mxl$Genotype..forward.strand.)/nrow(mxl)
+```
+Now let's look at a different population. I picked GBR.
+```{r}
+gbr <- read.csv("373522-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+```
+
+```{r}
+table(gbr$Genotype..forward.strand.)/nrow(gbr)
+```
+
