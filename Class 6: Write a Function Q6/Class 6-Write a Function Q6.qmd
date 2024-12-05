@@ -1,7 +1,7 @@
 ---
 title: "Class 6: Write a Function Q6"
 author: "Sophia Wang A16838155"
-format: pdf
+format: gfm
 ---
 ```{r}
 # Can you improve this analysis code?
