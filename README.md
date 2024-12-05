@@ -11,7 +11,7 @@ Class work for [BIMM143](https://github.com/sophiawang075/bimm143/) F24 at UC Sa
 
 - Class 9 [**Structural Bioinformatics (pt1)**](https://github.com/sophiawang075/bimm143/blob/main/Class%209%3A%20Structural%20Bioinformatics/Untitled.md)
 
-- Class 10 [**Halloween Candy Mini-Project**](https://github.com/sophiawang075/bimm143/blob/main/Class%2010%3A%20Halloween%20Mini-Project/Class%2010-%20Halloween%20Mini-Project.qmd)
+- Class 10 [**Halloween Candy Mini-Project**](https://github.com/sophiawang075/bimm143/blob/main/Class%2010%3A%20Halloween%20Mini-Project/Class%2010-%20Halloween%20Mini-Project.md)
 
 - Class 11 [**Structural Bioinformatics (pt2 AlphaFold)**]()
 
