@@ -1,7 +1,7 @@
 ---
 title: "Class 10: Halloween Mini-Project"
 author: "Sophia Wang (A16838155)"
-format: pdf
+format: gfm
 ---
 
 ```{r}
