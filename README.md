@@ -15,4 +15,4 @@ Class work for [BIMM143](https://github.com/sophiawang075/bimm143/) F24 at UC Sa
 
 - Class 11 [**Structural Bioinformatics (pt2 AlphaFold)**]()
 
-- Class 12 [**Genome informatics and high throughput sequencing**]()
+- Class 12 [**Genome informatics and high throughput sequencing**](https://github.com/sophiawang075/bimm143/blob/main/Class%2012%3A%20Genome%20informatics%20(online%20class)/Section%204-%20Homework.md)
