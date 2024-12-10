@@ -1,5 +1,5 @@
 ---
-title: "Lab18: Analyzing sequencing data in the cloud"
+title: "Lab17: Analyzing sequencing data in the cloud"
 author: Sophia Wang (A16838155)
 format: gfm
 ---

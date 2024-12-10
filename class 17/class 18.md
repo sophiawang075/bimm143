@@ -1,4 +1,4 @@
-# Lab18: Analyzing sequencing data in the cloud
+# Lab17: Analyzing sequencing data in the cloud
 Sophia Wang (A16838155)
 
 \##We are now finished our UNIX intensive work on AWS.
