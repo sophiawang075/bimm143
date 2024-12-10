@@ -13,7 +13,7 @@ Class work for [BIMM143](https://github.com/sophiawang075/bimm143/) F24 at UC Sa
 
 - Class 10 [**Halloween Candy Mini-Project**](https://github.com/sophiawang075/bimm143/blob/main/Class%2010%3A%20Halloween%20Mini-Project/Class%2010-%20Halloween%20Mini-Project.md)
 
-- Class 11 [**Structural Bioinformatics with AlphaFold (no link)**]
+- Class 11 **Structural Bioinformatics with AlphaFold (no link)**
 
 - Class 12 [**Genome informatics and high throughput sequencing**](https://github.com/sophiawang075/bimm143/blob/main/Class%2012%3A%20Genome%20informatics%20(online%20class)/Section%204-%20Homework.md)
 - Class 13 [**Transcriptomics and the analysis of RNA-Seq data**](https://github.com/sophiawang075/bimm143/blob/main/Class%2013%3A%20Transcriptomics%20and%20the%20analysis%20of%20RNA-Seq%20data/Class%2013.md)
