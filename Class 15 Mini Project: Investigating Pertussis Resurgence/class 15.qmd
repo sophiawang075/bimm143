@@ -1,7 +1,7 @@
 ---
-title: "Class 15"
+title: "Class 15 Pertussis Resurgence (mini-project)"
 author: "Sophia Wang (A16838155)"
-format: pdf
+format: gfm
 ---
 ##Background
 Pertussis, aka whooping cough, is a highly infections lung disease cuased by the bacteria *B. Pertussis*.

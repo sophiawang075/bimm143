@@ -1,5 +1,5 @@
 ---
-title: "Class 6: Write a Function Q6"
+title: "Class 6: R functions and R packages from CRAN and BioConductor"
 author: "Sophia Wang A16838155"
 format: gfm
 ---

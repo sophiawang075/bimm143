@@ -1,7 +1,7 @@
 ---
-title: "Class 12: Genome informatics (online class)"
+title: "Class 12: Genome informatics"
 author: "Sophia Wang (A16838155)"
-format: html
+format: gfm
 ---
 # Section 1. Proportion of G/G in a population
 

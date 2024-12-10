@@ -1,5 +1,5 @@
 ---
-title: "Section 4: Homework"
+title: "Class 12: Genome informatics R Studio Work"
 author: "Sophia Wang (A16838155)"
 format: gfm
 ---

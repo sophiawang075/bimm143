@@ -1,0 +1,20 @@
+---
+title: "Class16 (Unix Basics)"
+author: "Sophia Wang (A16838155)"
+format: gfm
+---
+##Using remote AWS instance (Part II)
+
+Transfer results back to computer
+
+*Local Analysis*
+
+```{r}
+rs<-read.table("myresult.tsv",col.names = c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue", "bitscore"))
+head(rs)
+```
+```{r}
+library(ggplot2)
+ggplot(rs, aes(pident, bitscore)) + geom_point(alpha=0.1) + geom_smooth()
+```
+

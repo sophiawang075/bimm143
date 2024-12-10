@@ -1,4 +1,4 @@
-# Class 6: Write a Function Q6
+# Class 6: R functions and R packages from CRAN and BioConductor
 Sophia Wang A16838155
 
 ``` r
@@ -132,7 +132,7 @@ protein_bfactor("4AKE","A","CA")
       Note: Accessing on-line PDB file
 
     Warning in get.pdb(file, path = tempdir(), verbose = FALSE):
-    /var/folders/n3/71d2q4t93flgq8f_vz36vq5c0000gp/T//RtmpiQjGh9/4AKE.pdb exists.
+    /var/folders/n3/71d2q4t93flgq8f_vz36vq5c0000gp/T//RtmpWfhRXB/4AKE.pdb exists.
     Skipping download
 
 ![](Class-6-Write-a-Function-Q6_files/figure-commonmark/unnamed-chunk-5-1.png)

@@ -1,7 +1,7 @@
 ---
-title: "Class 13: Transcriptomics"
+title: "Class 13: Transcriptomics and the analysis of RNA-Seq data"
 author: "Sophia Wang (A16838155)"
-format: pdf
+format: gfm
 ---
 Today we will analyze some RNASeq data from Himes et al. on the effects of dexamethasone (dex), a synthetic glucocorticoid steroid on airway smooth muscle cells (ASM).
 

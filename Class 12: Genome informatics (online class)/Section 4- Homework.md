@@ -1,4 +1,4 @@
-# Section 4: Homework
+# Class 12: Genome informatics R Studio Work
 Sophia Wang (A16838155)
 
 \##Section 4: Population Scale Analysis One sample is obviously not
