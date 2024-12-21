@@ -27,4 +27,3 @@ Class work for [BIMM143](https://github.com/sophiawang075/bimm143/) F24 at UC Sa
 
 - Class 17 [**Analyzing sequencing data in the cloud**](https://github.com/sophiawang075/bimm143/blob/main/class%2017/class%2018.md)
 
-- [**Find A Gene Project**](https://github.com/sophiawang075/bimm143/blob/main/Find%20a%20Gene%20Project.pdf)
